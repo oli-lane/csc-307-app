@@ -15,12 +15,15 @@ function MyApp() {
     postUser(person)
       .then((response) => {
         if (response.status === 201) {
-          setCharacters([...characters, person]);
+          response.json().then((newPerson) => {
+            setCharacters([...characters, newPerson]);
+          });
         }
       })
       .catch((error) => {
         console.log(error);
       });
+    console.log(characters);
   }
 
   function fetchUsers() {
@@ -36,6 +39,7 @@ function MyApp() {
       },
       body: JSON.stringify(person),
     });
+    console.log(characters);
 
     return promise;
   }
