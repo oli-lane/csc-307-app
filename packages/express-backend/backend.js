@@ -97,7 +97,7 @@ app.delete("/users/:id", (req, res) => {
 
   if (index !== -1) {
     users.users_list.splice(index, 1);
-    res.send("User deleted successfully.");
+    res.status(204).send();
   } else {
     res.status(404).send("User not found.");
   }

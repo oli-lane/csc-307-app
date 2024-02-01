@@ -5,10 +5,16 @@ import Form from "./Form";
 function MyApp() {
   const [characters, setCharacters] = useState([]);
   function removeOneCharacter(index) {
-    const updated = characters.filter((character, i) => {
-      return i !== index;
+    fetch(`http://localhost:8000/users/${characters[index].id}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 204) {
+        const updated = characters.filter((character, i) => {
+          return i !== index;
+        });
+        setCharacters(updated);
+      }
     });
-    setCharacters(updated);
   }
 
   function updateList(person) {
@@ -23,7 +29,6 @@ function MyApp() {
       .catch((error) => {
         console.log(error);
       });
-    console.log(characters);
   }
 
   function fetchUsers() {
@@ -39,8 +44,6 @@ function MyApp() {
       },
       body: JSON.stringify(person),
     });
-    console.log(characters);
-
     return promise;
   }
 
