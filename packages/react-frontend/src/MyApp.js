@@ -5,7 +5,7 @@ import Form from "./Form";
 function MyApp() {
   const [characters, setCharacters] = useState([]);
   function removeOneCharacter(index) {
-    fetch(`http://localhost:8000/users/${characters[index].id}`, {
+    fetch(`http://localhost:8000/users/${characters[index]._id}`, {
       method: "DELETE",
     }).then((response) => {
       if (response.status === 204) {
